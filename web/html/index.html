@@ -55,9 +55,11 @@
 			margin-left:20px;
 			color:LightSkyBlue ;
 		}
-		.section_right_content_warpper h1{
+		/*
+		.section_right_content_warpper {
 			text-align:center ;	
 		}
+		*/
 		</style>
 		<script src="/web/js/jquery.min.js" type="text/javascript"></script>
 	</head>
@@ -72,25 +74,25 @@
 			<div class="section_left">
 				<ul>
 					<li>
-						<a href="/web/html/user.html" id="user" value="user_manage"> 用户管理 </a>
+						<a class="redirect" url="/web/html/user.html" id="user" value="user_manage"> 用户管理 </a>
 					</li>
 					<li>
-						<a href="#" id="node" value="node_manage"> 节点管理 </a>
+						<a class="redirect" url="#" id="node" value="node_manage"> 节点管理 </a>
 					</li>
 					<li>
-						<a href="#" id="schema" value="schema_manage">路由管理</a>
+						<a class="redirect" url="#" id="schema" value="schema_manage">路由管理</a>
 					</li>
 					<li>
-						<a href="#" id="version" value="verion_manage">配置版本管理</a>
+						<a class="redirect" url="#" id="version" value="verion_manage">配置版本管理</a>
 					</li>
 					<li>
-						<a href="#" id="kv" value="kv_manage" >KV管理</a>
+						<a class="redirect" url="#" id="kv" value="kv_manage" >KV管理</a>
 					</li>
 				</ul>
 			</div>
 			<div class="section_right">
 				<div class="section_right_nav">
-				
+					
 				</div>
 				<div class="section_right_content_warpper">
 					<h1> 欢迎来到配置管理页 </h1>
@@ -102,16 +104,19 @@
 		function setTitle(titleName) {
 			$(".section_right_nav").text(titleName) ;	
 		}
-		function loadPage(element) {
+		function loadPage(element,url) {
 			setTitle(element.text) ;
-			$.get(element.href , function(result) {
-				$(".section_right_content_warpper").empty().append(result) ;
+			$.get(url , function(result) {
+				console.log(result) ;	
+				$(".section_right_content_warpper").html(result);
 			}) ;
 		}
 
-		$("a").on("click" , function(event) {
+		$(".redirect").on("click" , function(event) {
+			var url = this.getAttribute("url");
 			var element = event.target ;
-			loadPage(element) ;
+			loadPage(element , url) ;
 		});
 	</script>
 </html>
+
