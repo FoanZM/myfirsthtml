@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Manager</title>
+		<style type="text/css">
+		html,body{
+			margin:0px ; /*清除一下浏览器body自带边框*/
+			height:100% ;
+		}
+		/*导航栏*/
+		.nav {
+			width: 100%;
+			height: 40px;
+			line-height: 30px;
+			background-color: rgba(0,0,0,0.05); /*背景色透明度*/
+		}
+		.nav_top{
+			width: 1200px;
+			margin: 0 auto; /*当本div居中*/
+		}
+		.nav_top span{
+			float: right; /*让"当前用户"到最右边*/
+		}
+		section {
+			width:100%;
+			height:100% ;
+			margin:0 auto;
+		}
+		/*导航栏*/
+		/*左边的内容*/
+		.section_left{
+			width: 15%; /*不设置宽度就默认100%*/
+			height: 100%; /*蓝色要多长给多高*/
+			background-color: cornflowerblue;
+			border-right:14px solid green;
+			float:left ;
+		}
+		.section_left li{
+			color: white;
+			height: 30px;
+			line-height: 30px;
+		}
+		/*左边的内容*/
+		.section_right{
+			background-color: gray ;	
+			height:100% ;
+			width:100% ;
+		}
+		.section_right_nav{
+			background-color: gold;
+			height: 40px;
+			line-height: 30px;
+			font-size:20px;
+			margin-left:20px;
+			color:LightSkyBlue ;
+		}
+		.section_right_content_warpper h1{
+			text-align:center ;	
+		}
+		</style>
+		<script src="/web/js/jquery.min.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<div class="nav"> <!--便于给导航栏添加底色-->
+			<div class="nav_top">
+				<a href="#" id="system" >管理系统</a>
+				<span>当前用户: <a href="" id="login_name" >none</a></span>
+			</div>
+		</div>
+		<section>
+			<div class="section_left">
+				<ul>
+					<li>
+						<a href="/web/html/user.html" id="user" value="user_manage"> 用户管理 </a>
+					</li>
+					<li>
+						<a href="#" id="node" value="node_manage"> 节点管理 </a>
+					</li>
+					<li>
+						<a href="#" id="schema" value="schema_manage">路由管理</a>
+					</li>
+					<li>
+						<a href="#" id="version" value="verion_manage">配置版本管理</a>
+					</li>
+					<li>
+						<a href="#" id="kv" value="kv_manage" >KV管理</a>
+					</li>
+				</ul>
+			</div>
+			<div class="section_right">
+				<div class="section_right_nav">
+				
+				</div>
+				<div class="section_right_content_warpper">
+					<h1> 欢迎来到配置管理页 </h1>
+				</div>
+			</div>
+		</section>
+	</body>
+	<script>
+		function setTitle(titleName) {
+			$(".section_right_nav").text(titleName) ;	
+		}
+		function loadPage(element) {
+			setTitle(element.text) ;
+			$.get(element.href , function(result) {
+				$(".section_right_content_warpper").empty().append(result) ;
+			}) ;
+		}
+
+		$("a").on("click" , function(event) {
+			var element = event.target ;
+			loadPage(element) ;
+		});
+	</script>
+</html>
