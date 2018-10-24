@@ -5,25 +5,26 @@
 		<title>Manager</title>
 		<style type="text/css">
 		html,body{
-			margin:0px ; /*清除一下浏览器body自带边框*/
+			margin:0; /*清除一下浏览器body自带外边距*/
+			padding:0;/*清除一下浏览器body自带-内-边距*/
 			height:100% ;
 		}
 		/*导航栏*/
 		.nav {
 			width: 100%;
 			height: 40px;
-			line-height: 30px;
+			line-height: 40px;    /*跟高度设置一样，这是行高，可以上下居中*/
 			background-color: rgba(0,0,0,0.05); /*背景色透明度*/
 		}
 		.nav_top{
 			width: 1200px;
-			margin: 0 auto; /*当本div居中*/
+			margin: 0 auto; /*让本div居中*/
 		}
 		.nav_top span{
 			float: right; /*让"当前用户"到最右边*/
 		}
 		section {
-			width:100%;
+			width:1200px;
 			height:100% ;
 			margin:0 auto;
 		}
@@ -33,17 +34,56 @@
 			width: 15%; /*不设置宽度就默认100%*/
 			height: 100%; /*蓝色要多长给多高*/
 			background-color: cornflowerblue;
-			border-right:14px solid green;
-			float:left ;
+			border-right:2px solid green;
+			float:left ;/*让"this"到最左边*/
 		}
-		.section_left li{
+		.section_left>ul{
+			padding-left: 0;/*清除列表项左边的内边距*/
+		}
+		.section_left>.ul1>li{
 			color: white;
-			height: 30px;
+			/*height: 30px;*/
 			line-height: 30px;
+			text-align: center; /*文字居中*/
+			list-style: none; /*去掉用户管理那些前面的小圆点*/
+			cursor: pointer;/*模拟悬浮在标签上方的的时候小手样式*/
 		}
+		/*
+		 * 
+		 *41-46-47-48-57-66{}-118-151 行代码
+		 */
+		.section_left>.ul1>li:hover{
+			background-color: rgba(0,0,0,0.1);
+			transition-duration: 0.5s;/*悬浮显示背景色的过渡时间*/
+			
+		}
+		.section_left>.ul1>li li{
+			list-style: none;
+		}
+		.ul1_1{
+			display: none;
+		}
+		.section_left>.ul1>li:first-child:hover .ul1_1{
+			display: inherit;
+			/*鼠标悬浮在"用户管理上"的时候显示子节点
+			 :first-child = 第一个li标签
+			 :hover = 悬浮
+			 * */
+		}
+		.ul1_2{
+			display: none;
+		}
+		.section_left>.ul1>li:nth-child(2):hover .ul1_2{
+			display: inherit;
+			/*鼠标悬浮在"用户管理上"的时候显示子节点
+			 :nth-child(2) = 2 = 第2个li标签
+			 :hover = 悬浮
+			 * */
+		}
+		
 		/*左边的内容*/
 		.section_right{
-			background-color: gray ;	
+			background-color: rgba(0,0,0,0.1) ;	
 			height:100% ;
 			width:100% ;
 		}
@@ -72,12 +112,20 @@
 		</div>
 		<section>
 			<div class="section_left">
-				<ul>
+				<ul class="ul1">
 					<li>
 						<a class="redirect" url="/web/html/user.html" id="user" value="user_manage"> 用户管理 </a>
+						<ul class="ul1_1">
+							<li>1子节点1</li>
+							<li>1子节点2</li>
+						</ul>
 					</li>
 					<li>
 						<a class="redirect" url="#" id="node" value="node_manage"> 节点管理 </a>
+						<ul class="ul1_2">
+							<li>2子节点1</li>
+							<li>2子节点2</li>
+						</ul>
 					</li>
 					<li>
 						<a class="redirect" url="#" id="schema" value="schema_manage">路由管理</a>
@@ -100,6 +148,8 @@
 			</div>
 		</section>
 	</body>
+	<!--使用jQuery必须引入jQuery的框架库-->
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 	<script>
 		function setTitle(titleName) {
 			$(".section_right_nav").text(titleName) ;	
@@ -119,4 +169,3 @@
 		});
 	</script>
 </html>
-
